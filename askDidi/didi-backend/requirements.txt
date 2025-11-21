@@ -1,9 +1,5 @@
 fastapi
 uvicorn
-pandas
-numpy
-sentence-transformers
-torch
 pymongo
 python-dotenv
 google-generativeai

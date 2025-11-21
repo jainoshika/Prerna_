@@ -3,13 +3,15 @@ import AgeBasedSection from "./AgeBased/AgeBasedSection";
 import MainCategorySection from "./MainCategorySection/MainCategorySection";
 import TestimonialSection from "./TestimonialSection/TestimonialSection";
 import FinalCTASection from "./FinalCTASection/FinalCTASection";
+import AllSchemes from "./AllSchemes";
 
 export default function Schemes() {
   return (
     <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-rose-50">
 
-      <AgeBasedSection />
+      {/* <AgeBasedSection /> */}
       <MainCategorySection />
+      <AllSchemes />
       {/* <TestimonialSection /> */}
       <FinalCTASection />
 

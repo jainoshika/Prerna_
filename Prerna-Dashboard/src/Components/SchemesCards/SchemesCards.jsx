@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GraduationCap, BookOpen, Users, Award, Shield, Heart, ChevronRight } from 'lucide-react';
 // import { useTranslation } from "react-i18next"; 
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 // --- Configuration and Constants ---
 
@@ -9,7 +10,7 @@ import axios from 'axios';
 const API_BASE_URL = "http://127.0.0.1:8000"; 
 // Changed endpoint to target the general /schemes route
 const SCHEMES_ENDPOINT = `${API_BASE_URL}/schemes`; 
-const ALL_OPPORTUNITIES_ROUTE = "/all-opportunities"; // Placeholder route
+const ALL_OPPORTUNITIES_ROUTE = "/schemes"; // Placeholder route
 
 // A mapping for icons based on the data 'type' or a category in your DB
 const iconMap = {
@@ -27,19 +28,19 @@ const getIcon = (type) => iconMap[type.toLowerCase()] || iconMap.default;
 
 // Dynamic card styling logic (3 unique styles)
 const cardStyles = [
-  // Card 1: Coral Background (#D9534F) - FIX: White Button, Coral Text/Icon for contrast
+  // Card 1: Coral Background (#D9534F)
   { 
     bg: 'bg-[#D9534F]', accent: '#FFC843', text: 'text-white', 
     buttonBg: 'bg-white', buttonText: 'text-[#D9534F]', 
     buttonHover: 'hover:bg-[#FFC843]/50', borderColor: '' 
   }, 
-  // Card 2: Creamy White Background (#FBFBFB) - Coral Button, White Text/Icon
+  // Card 2: Creamy White Background (#FBFBFB)
   { 
     bg: 'bg-[#FBFBFB]', accent: '#D9534F', text: 'text-[#333333]', 
     buttonBg: 'bg-[#D9534F]', buttonText: 'text-white', 
     buttonHover: 'hover:bg-[#FFC843]', borderColor: 'border border-[#FFC843]' 
   }, 
-  // Card 3: Yellow Background (#FFC843) - Coral Button, White Text/Icon
+  // Card 3: Yellow Background (#FFC843)
   { 
     bg: 'bg-[#FFC843]', accent: '#D9534F', text: 'text-[#333333]', 
     buttonBg: 'bg-[#D9534F]', buttonText: 'text-white', 
@@ -49,14 +50,7 @@ const cardStyles = [
 
 
 export default function SchemesCards() {
-  const t = (key, fallback) => {
-    // Mock translation function: returns hardcoded English fallbacks
-    if (key === "schemes.title") return "General Government Schemes";
-    if (key === "schemes.subtitle") return "All available schemes filtered by your age and region.";
-    if (key === "schemes.learn_more") return "View Scheme";
-    if (key === "schemes.more_opportunities") return "Browse All Opportunities";
-    return fallback;
-  }; 
+    const { t, i18n } = useTranslation();
   
   const [opportunities, setOpportunities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,14 +64,15 @@ export default function SchemesCards() {
     const userAge = storedUser.age || 18;
     const userRegion = storedUser.region || "India";
     
-    // Construct URL using age and region only, as per /schemes endpoint signature
+    // ACTION: Limiting to 3 in the query, and forcing 3 cards to be displayed
     const url = `${SCHEMES_ENDPOINT}?age=${userAge}&region=${userRegion}`;
 
     axios.get(url)
       .then(response => {
         // The schemes endpoint returns data under the 'schemes' key
         if (response.data && Array.isArray(response.data.schemes)) {
-          setOpportunities(response.data.schemes);
+          // NOTE: We rely on the backend filtering, but enforce the slice here for display consistency.
+          setOpportunities(response.data.schemes); 
         } else {
           setError('Failed to fetch data: ' + (response.data.message || 'Unknown error'));
         }
@@ -95,7 +90,7 @@ export default function SchemesCards() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#FBFBFB] py-20 px-6 text-center text-[#D9534F] font-bold text-xl">
-        Loading schemes...
+        Loading top schemes...
       </div>
     );
   }
@@ -108,20 +103,20 @@ export default function SchemesCards() {
     );
   }
   
-  // Display up to 9 opportunities to fill a nice grid
-  const opportunitiesToDisplay = opportunities.slice(0, 9); 
+  // ACTION: Limit display to 3 cards for the "top recommendations" style
+  const opportunitiesToDisplay = opportunities.slice(0, 3); 
 
   return (
     <div className="min-h-screen bg-[#FBFBFB] py-20 px-6">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
+        {/* Section Header - Women-Centric Title */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-[#FFC843] to-[#D9534F] mb-4">
-            {t("schemes.title")}
+            {t("schemes_fe.title")}
           </h2>
           <p className="text-[#333333] text-xl">
-            {t("schemes.subtitle")}
+            {t("schemes_fe.subtitle")}
           </p>
         </div>
 
@@ -195,7 +190,7 @@ export default function SchemesCards() {
                     <div className={`w-full ${style.buttonBg} ${style.buttonText} py-3 px-6 rounded-full font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-2 group-hover:shadow-xl
                         ${style.buttonHover}
                     `}>
-                      <span>{t("schemes.learn_more")}</span>
+                      <span>{t("schemes_fe.learn_more")}</span>
                       {/* Icon color logic: if button is white, use the button's text color (Coral); otherwise, use white. */}
                       <ButtonIcon size={20} className={isWhiteButton ? style.buttonText : 'text-white'}/>
                     </div>
@@ -210,9 +205,9 @@ export default function SchemesCards() {
         <div className="text-center mt-12">
             <a 
                 href={ALL_OPPORTUNITIES_ROUTE}
-                className="inline-flex items-center space-x-2 px-8 py-3 text-lg font-bold rounded-full text-white bg-gradient-to-r from-[#D9534F] to-[#FFC843] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center space-x-2 px-8 py-3 text-lg font-bold rounded-full text-white bg-linear-to-r from-[#D9534F] to-[#FFC843] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
-                <span>{t("schemes.more_opportunities")}</span>
+                <span>{t("schemes_fe.more_opportunities")}</span>
                 <ChevronRight size={20} />
             </a>
         </div>

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { GraduationCap, BookOpen, Users, Award, Shield, Heart, ChevronRight } from 'lucide-react';
 // import { useTranslation } from "react-i18next"; 
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 // --- Configuration and Constants ---
 
 // Using hardcoded URL as requested for compilation environment.
 const API_BASE_URL = "http://127.0.0.1:8000"; 
 const RECOMMEND_ENDPOINT = `${API_BASE_URL}/recommend`;
-const ALL_OPPORTUNITIES_ROUTE = "/all-opportunities"; // Placeholder route for the new button
+const ALL_OPPORTUNITIES_ROUTE = "/opportunities"; // Placeholder route for the new button
 
 // A mapping for icons based on the data 'type' or a category in your DB
 const iconMap = {
@@ -47,14 +48,7 @@ const cardStyles = [
 
 
 export default function FeatureCards() {
-  const t = (key, fallback) => {
-    // Mock translation function: returns hardcoded English fallbacks
-    if (key === "services.title") return "Personalized Opportunities";
-    if (key === "services.subtitle") return "Recommendations based on your profile.";
-    if (key === "services.learn_more") return "Read More";
-    if (key === "services.more_opportunities") return "More Opportunities"; // New key
-    return fallback;
-  }; 
+  const { t, i18n } = useTranslation();
   
   const [opportunities, setOpportunities] = useState([]);
   const [loading, setLoading] = useState(true);

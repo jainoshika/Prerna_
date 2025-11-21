@@ -6,6 +6,11 @@ import { MdVaccines } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FeatureCards from "../FeatureCards/FeatureCards";
+import SchemesCards from "../SchemesCards/SchemesCards";
+import ScholarshipCards from "../ScholarshipCards/ScholarshipCards";
+import HealthCards from "../HealthCards/HealthCards";
+import SportsCards from "../SportsCards/SportsCards";
+import MotivationCards from "../MotivationCards/MotivationCards";
 
 export default function DashboardPage() {
   const { t } = useTranslation();
@@ -211,6 +216,11 @@ export default function DashboardPage() {
       </div>
 
       <FeatureCards />
+      <SchemesCards />
+      <ScholarshipCards />
+      <HealthCards />
+      <SportsCards />
+      <MotivationCards />
     </div>
   );
 }

@@ -9,6 +9,94 @@
   "blogs": "Blogs",
   "contact": "Contact",
   "login": "Login",
+  "opportunities": "Opportunity",
+  "scholarships": "Scholarships",
+  "sports": "Sports",
+  "motivation": "Motivation",
+
+  "profile": "My Profile",
+  "dashboard": "Dashboard",
+  "settings": "Settings",
+  "logout": "Log Out",
+  "switch_lang_hi": "Switch to हिंदी",
+  "switch_lang_en": "Switch to English",
+  "get_support": "Get Support",
+
+  "services": {
+    "title": "Personalized Opportunities",
+    "subtitle": "Recommendations based on your profile.",
+    "learn_more": "Read More",
+    "more_opportunities": "More Opportunities"
+  },
+
+  "schemes_fe": {
+    "title": "Empowering Government Schemes",
+    "subtitle": "Top 3 relevant schemes tailored for your age and region.",
+    "learn_more": "View Scheme Details",
+    "more_opportunities": "Browse All Schemes"
+  },
+
+  "Scholarships": {
+    "header_tag": "Education & Scholarship",
+    "title": "Women's Education & Empowerment Programs",
+    "subtitle": "Top 3 tailored funding opportunities to help you build your future.",
+    "learn_more": "Explore Opportunity",
+    "more_opportunities": "Discover More Scholarship",
+    "badge_women": "For Women",
+    "no_scholarships_title": "No scholarships found",
+    "no_scholarships_desc": "No scholarships found for your current profile. We recommend reviewing the general schemes.",
+    "loading": "Loading personalized scholarship programs...",
+    "error": "Error"
+  },
+  "general": {
+    "view_details": "View Details"
+  },
+
+  "Health": {
+    "tagline": "Prioritizing Women's Health",
+    "title": "Health & Holistic Wellness Programs",
+    "subtitle": "Top 3 essential healthcare supports, from maternal care to mental resilience, tailored for you.",
+    "available": "Active Support",
+    "learn_more": "View Health Program",
+    "more_opportunities": "Explore All Health Resources",
+    "no_programs": "No specialized health programs found for your current profile.",
+    "loading": "Loading personalized health programs...",
+    "error": "Error",
+    "untitled": "Untitled Program",
+    "fallback_description": "Detailed information about this essential healthcare scheme is available on the scheme page."
+  },
+
+  "Sports": {
+    "tagline": "Women Fitness & Sports",
+    "title": "Women's Sports & High-Performance Fitness",
+    "subtitle": "Top 3 training, scholarship, and fitness programs empowering female athletes and participants.",
+    "learn_more": "Register Now",
+    "more_opportunities": "View All Sports Programs",
+    "no_programs": "No specialized sports programs found for your current profile.",
+    "no_programs_sub": "Check back soon for more women sports and fitness opportunities!",
+    "loading": "Loading elite sports programs...",
+    "error": "Error",
+    "untitled": "Untitled Program",
+    "fallback_description": "Detailed information about this sports scheme, training, or fitness opportunity is available on the program page.",
+    "women_focused": "Women Focused",
+    "ages": "Ages"
+  },
+
+  "Motivation": {
+    "title": "Inspirational Stories & Videos",
+    "subtitle": "Watch the top motivational content curated for women empowerment.",
+    "more_opportunities": "Browse All Resources",
+    "loading": "Loading inspirational content...",
+    "error": "Error",
+    
+    "badge_default": "MOTIVATION",
+    "explore_resource": "Explore Resource",
+    "video_unavailable": "Video Embed Unavailable",
+
+    "fallback_untitled": "Untitled Resource",
+    "fallback_description": "Inspirational content designed to encourage, support, and uplift the women in our community."
+  },
+
 
   "hero_title": "Use your voice to change your life — because your voice deserves to be heard.",
   "hero_description": "A platform designed to guide, support and uplift every girl and woman with trusted information, secure tools and real-time assistance.",
@@ -39,33 +127,114 @@
 
   "chat_with_sakhi": "Chat with Sakhi",
 
-  "services": {
-    "title": "Our Services",
-    "subtitle": "Comprehensive support for women's empowerment",
+  "tailoredForYou": "Tailored For You",
+  "yourBestOpportunities": "Your Best Opportunities",
+  "curatedPrograms": "Curated programs, scholarships, and resources matched perfectly for your profile and aspirations.",
 
-    "childcare_title": "Licensed Child Care",
-    "childcare_desc": "Providing safe, trusted, and nurturing child care services with certified professionals.",
-    "learn_more": "Learn More",
+  "filterByType": "Filter by Type",
+  "filterByRegion": "Filter by Region",
 
-    "learning_title": "High Quality Learning",
-    "learning_desc": "Access structured learning programs, workshops, and educational support for women of all ages.",
+  "topMatches": "Top Matches",
+  "noMatchesFound": "No Matches Found",
+  "noMatchesDescription": "Try broadening your search filters to explore more opportunities!",
 
-    "staff_title": "Trusted Staff",
-    "staff_desc": "Connect with verified and trusted support staff dedicated to helping women and children.",
+  "exploreApply": "Explore & Apply",
+  "region": "Region",
+  "ageRange": "Ages",
+  "loadingMessage": "Loading personalized opportunities for you...",
+  "errorMessage": "Failed to load data",
 
-    "women_programs_title": "Women Empowerment Programs",
-    "women_programs_subtitle": "Tailored support for every woman's journey",
+  "ctaLine": "More opportunities added regularly. Check back soon!",
 
-    "skill_title": "Skill Development",
-    "skill_desc": "Empowering women with vocational training, digital literacy, and career guidance for financial independence.",
-    "skill_btn": "Explore Programs",
+  "categories": {
+    "scholarship": "Scholarship",
+    "scheme": "Scheme",
+    "sports": "Sports",
+    "motivation": "Motivation",
+    "healthcare": "Healthcare",
+    "training": "Training",
+    "job": "Job",
+    "internship": "Internship"
+  },
 
-    "health_title": "Health & Wellness",
-    "health_desc": "Comprehensive health support including maternal care, mental wellness, and nutrition guidance.",
-    "health_btn": "Access Support",
+  "CTASection": {
+    "rocket_alt": "Launch Icon",
+    "title": "Ready to Discover Your Next Opportunity?",
+    "subtitle": "Access hundreds of schemes, scholarships, and programs personalized for your region, age, and aspirations.",
+    "button_explore": "Explore All Programs",
+    "button_ask_sakhi": "Ask Sakhi for Guidance"
+  },
 
-    "community_title": "Community Support",
-    "community_desc": "Join a network of empowered women, share experiences, and access mentorship for growth.",
-    "community_btn": "Join Community"
+  "MainCategory": {
+    "hero_title": "Your journey, our support 🚀",
+    "loading_text": "Loading Opportunities...",
+    "relevant_schemes": "Relevant Schemes:",
+    "loading_schemes": "Loading schemes...",
+    "no_schemes": "No schemes found for your current age/region criteria.",
+    "features_title": "Features:",
+    "categories": {
+      "education": {
+        "title": "Education & Scholarships",
+        "description": "From primary to higher education - scholarships, fellowships, and learning programs for every age",
+        "features": [
+          "Age-based filtering",
+          "Application guidance",
+          "Document checklist",
+          "Deadline alerts"
+        ]
+      },
+      "health": {
+        "title": "Health & Wellness",
+        "description": "Maternal health, vaccination schedules, menstrual hygiene, nutrition programs and medical support",
+        "features": [
+          "Vaccination tracker",
+          "Period calendar",
+          "Health tips",
+          "Hospital locator"
+        ]
+      },
+      "menstrual": {
+        "title": "Menstrual Health & Hygiene",
+        "description": "Comprehensive guidance on menstrual health, hygiene products, myths vs facts, and support resources",
+        "features": [
+          "Period tracker",
+          "Myth busters",
+          "Product guidance",
+          "Pain management tips"
+        ]
+      },
+      "safety": {
+        "title": "Safety & Legal Support",
+        "description": "24/7 helplines, legal aid, protection schemes, and immediate support for women in distress",
+        "features": [
+          "SOS alert",
+          "Helpline numbers",
+          "Legal guidance",
+          "Safety tips"
+        ]
+      },
+      "employment": {
+        "title": "Employment & Entrepreneurship",
+        "description": "Job opportunities, skill training, business loans, and career advancement programs",
+        "features": [
+          "Job portal",
+          "Skill courses",
+          "Loan calculator",
+          "Mentor connect"
+        ]
+      },
+      "sports": {
+        "title": "Sports & Fitness",
+        "description": "Sports scholarships, training programs, competition opportunities, and fitness guidance",
+        "features": [
+          "Training centers",
+          "Competition calendar",
+          "Scholarship info",
+          "Fitness plans"
+        ]
+      }
+    }
   }
+
+  
 }

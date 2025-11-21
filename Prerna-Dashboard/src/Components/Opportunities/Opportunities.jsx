@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronRight, Award, Briefcase, GraduationCap, Star, Target, Zap } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 // --- THEME COLORS ---
 const BRIGHT_CORAL = "D9534F";
@@ -86,10 +87,12 @@ const OpportunitiesGrid = ({ data }) => {
                     </p>
 
                     {/* CTA Button: Deep Orange text */}
-                    <button className={`w-full text-[#CD4628] font-bold text-sm flex items-center space-x-1 hover:space-x-2 transition-all`}>
+                    <NavLink
+                    to="/opportunities"
+                    className={`w-full text-[#CD4628] font-bold text-sm flex items-center space-x-1 hover:space-x-2 transition-all`}>
                         <span>Apply / View Details</span>
                         <ChevronRight className="w-4 h-4" />
-                    </button>
+                    </NavLink>
                 </div>
             ))}
         </div>

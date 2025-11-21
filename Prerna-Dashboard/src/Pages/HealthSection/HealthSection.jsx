@@ -3,14 +3,16 @@ import CategoriesSection from "./CategoriesSection";
 import AgeCareSection from "./AgeCareSection";
 import SchemesSection from "./SchemesSection";
 import CTASection from "./CTASection";
+import HealthPrograms from "./HealthPrograms";
 
 const HealthSection = () => {
   return (
     // Updated Background: Creamy White/Soft Pink Mix
     <div className="min-h-screen bg-gradient-to-br from-[#FBFBFB] via-[#F9E8EC] to-[#FBFBFB]">
-      <CategoriesSection />
-      <AgeCareSection />
-      <SchemesSection />
+      {/* <CategoriesSection /> */}
+      <HealthPrograms />
+      {/* <AgeCareSection /> */}
+      {/* <SchemesSection /> */}
       <CTASection />
     </div>
   );

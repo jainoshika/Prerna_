@@ -11,33 +11,40 @@ import Layout from "./Layout";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Schemes from "./Pages/Schemes/Schemes";
 import HealthSection from "./Pages/HealthSection/HealthSection";
-import GuidanceSection from "./Pages/GuidanceSection/GuidanceSection";
 import Sakhi from "./Pages/Sakhi/Sakhi";
 import SupportSection from "./Pages/SupportSection/SupportSection";
-import BlogSection from "./Pages/BlogSection/BlogSection";
 import Auth from "./Components/Auth/Auth";
 import AboutPrernaPlatform from "./Pages/AboutSection/AboutPrernaPlatform";
 import AskDidi from "./Pages/AskDidi/AskDidi";
-import Opportunities from "./Components/Opportunities/Opportunities";
+import OpportunitiesPage from "./Pages/OpportunitiesPage/OpportunitiesPage";
+import ScholarshipPage from "./Pages/Scholarship/Scholarship";
+import SportsPage from "./Pages/SportsPage/SportsPage";
+import MotivationPage from "./Pages/MotivationPage/MotivationPage";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* All pages wrapped inside Layout */}
+        
+        {/* ❗ AUTH PAGE OUTSIDE LAYOUT → Fullscreen, no header/footer */}
+        <Route path="/auth" element={<Auth />} />
+
+        {/* All other pages use the Layout */}
         <Route element={<Layout />}>
-          <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/about-section" element={<AboutPrernaPlatform />} />
           <Route path="/schemes" element={<Schemes />} />
-          <Route path="/all-opportunities" element={<Opportunities />} />
           <Route path="/health" element={<HealthSection />} />
-          <Route path="/guidance" element={<GuidanceSection />} />
           <Route path="/sakhi" element={<Sakhi />} />
           <Route path="/ask-Didi" element={<AskDidi />} />
           <Route path="/support" element={<SupportSection />} />
-          <Route path="/blogs" element={<BlogSection />} />
+
+          <Route path="/opportunities" element={<OpportunitiesPage />} />
+          <Route path="/scholarships" element={<ScholarshipPage />} />
+          <Route path="/sports" element={<SportsPage />} />
+          <Route path="/motivation" element={<MotivationPage />} />
         </Route>
+
       </Routes>
     </Router>
   );
