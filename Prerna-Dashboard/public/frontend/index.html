@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Avatar Speak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="avatar-container">
+        <img id="avatar" src="avatar.png" class="avatar">
+        <audio id="audio" hidden></audio>
+    </div>
+
+    <div class="chat-box">
+        <h3>Text Chat</h3>
+        <textarea id="input" placeholder="Type your message here..."></textarea>
+        <button type="button" onclick="sendMessage()">💬 Send Message</button>
+    </div>
+
+    <div class="controls">
+        <h3>Voice Input</h3>
+        <button type="button" onclick="startRecording()">🎤 Start Speaking</button>
+        <button type="button" onclick="stopRecording()">⏹ Stop Recording</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

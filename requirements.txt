@@ -7,3 +7,4 @@ torch
 pymongo
 python-dotenv
 google-generativeai
+gtts

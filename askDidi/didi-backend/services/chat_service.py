@@ -19,8 +19,13 @@ def save_chat_message(user_id, role, text):
 def reset_history(user_id):
     history_collection.delete_one({"user_id": user_id})
 
-
 def build_prompt(profile, history, user_msg):
+
+    history_text = "".join(
+        "{}: {}\n".format(msg['role'].capitalize(), msg['text'])
+        for msg in history
+    )
+
     prompt = f"""
 <system>
 आप भारत की ग्रामीण महिलाओं की सहायता करने वाली एक AI सलाहकार हैं।
@@ -43,7 +48,7 @@ def build_prompt(profile, history, user_msg):
 </user_profile>
 
 <conversation_history>
-{ "".join(f"{msg['role'].capitalize()}: {msg['text']}\n" for msg in history) }
+{history_text}
 </conversation_history>
 
 <user_message>
@@ -57,11 +62,11 @@ def build_prompt(profile, history, user_msg):
 - ग्रामीण महिलाओं के लिए समझ में आने योग्य,
 - छोटा और सहायक उत्तर लिखिए।
 </task>
+
 <final_rule>
 अगर आपके उत्तर में एक भी अंग्रेज़ी शब्द होगा तो वह गलत माना जाएगा।
 इसलिए केवल हिंदी में ही उत्तर दीजिए।
 </final_rule>
-<response>
 
 <response>
 """

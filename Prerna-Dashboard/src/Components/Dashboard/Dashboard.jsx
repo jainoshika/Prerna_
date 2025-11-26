@@ -11,10 +11,16 @@ import ScholarshipCards from "../ScholarshipCards/ScholarshipCards";
 import HealthCards from "../HealthCards/HealthCards";
 import SportsCards from "../SportsCards/SportsCards";
 import MotivationCards from "../MotivationCards/MotivationCards";
+import { useNavigate } from "react-router-dom"
 
 export default function DashboardPage() {
   const { t } = useTranslation();
   const [isFloating, setIsFloating] = useState(false);
+  const navigate = useNavigate();
+
+  const openDidiFrontend = () => {
+    window.location.href = "/frontend/index.html";
+  }
 
   // Detect scroll
   useEffect(() => {
@@ -68,9 +74,11 @@ export default function DashboardPage() {
                 {!isFloating && (
                   <div className="flex flex-wrap gap-4">
                     {/* Voice Button Primary Gradient */}
-                    <NavLink to="/ask-Didi" className="bg-linear-to-r from-[#D9534F] to-[#FFC843] w-[35%] bg-size-200 bg-pos-0 hover:bg-pos-100 text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105">
+                    <button 
+                     onClick={openDidiFrontend}
+                     className="bg-linear-to-r from-[#D9534F] to-[#FFC843] w-[35%] bg-size-200 bg-pos-0 hover:bg-pos-100 text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105">
                       <FaMicrophone className="text-white" size={30} />
-                    </NavLink>
+                    </button>
 
                     {/* Explore Button Secondary Accent */}
                     <button className="border-2 border-[#D9534F] text-[#D9534F] px-10 py-4 rounded-full text-lg font-bold hover:bg-[#FFC843]/30 transition-all flex items-center space-x-2 transform hover:scale-105">
@@ -82,9 +90,9 @@ export default function DashboardPage() {
 
                 {/* Floating Microphone Button */}
                 {isFloating && (
-                  <NavLink to="/ask-Didi" className="fixed bottom-6 left-6 bg-linear-to-r from-[#D9534F] to-[#FFC843] text-white shadow-2xl shadow-[#333333]/50 rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 transform hover:scale-110 z-100">
+                  <button onClick={openDidiFrontend} className="fixed bottom-6 left-6 bg-linear-to-r from-[#D9534F] to-[#FFC843] text-white shadow-2xl shadow-[#333333]/50 rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 transform hover:scale-110 z-100">
                     <FaMicrophone size={32} />
-                  </NavLink>
+                  </button>
                 )}
               </div>
 

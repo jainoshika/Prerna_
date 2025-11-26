@@ -1,0 +1,142 @@
+/* --- Global Styles --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); /* Light gradient background */
+    color: #263238; /* Dark text color */
+    padding: 20px;
+}
+
+h3 {
+    color: #00796b; /* Teal color for headings */
+    margin-top: 0;
+    font-weight: 600;
+}
+
+/* --- Avatar Section --- */
+.avatar-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid #00bcd4; /* Cyan border */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Lifted shadow */
+    transition: all 0.4s ease-in-out;
+}
+
+/* Speaking Animation: Enhanced pulsing glow effect */
+.avatar.speaking {
+    border-color: #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1.0);
+        box-shadow: 0 0 10px 5px rgba(0, 188, 212, 0.6);
+    }
+    to {
+        transform: scale(1.03);
+        box-shadow: 0 0 25px 10px rgba(0, 188, 212, 0.9);
+    }
+}
+
+/* --- Chat and Controls Section --- */
+.chat-box, .controls {
+    width: 90%;
+    max-width: 450px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    resize: none; /* Fixed size */
+    min-height: 80px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+/* --- Buttons --- */
+button {
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 25px; /* Pill shape */
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, background-color 0.2s;
+    text-transform: uppercase;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Send Text Button */
+.chat-box button {
+    background-color: #43a047; /* Bright Green */
+    color: white;
+    width: 100%;
+}
+
+/* Recording Buttons */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls button {
+    width: 90%;
+    margin: 8px 0;
+}
+
+.controls button:first-of-type {
+    background-color: #ff9800; /* Amber for Start Recording */
+    color: #333;
+}
+
+.controls button:last-of-type {
+    background-color: #e53935; /* Deep Red for Stop Recording */
+    color: white;
+}
+
+/* Hover Effects */
+.chat-box button:hover {
+    background-color: #388e3c;
+}
+
+.controls button:first-of-type:hover {
+    background-color: #fb8c00;
+}
+
+.controls button:last-of-type:hover {
+    background-color: #c62828;
+}

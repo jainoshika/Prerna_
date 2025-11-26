@@ -1,117 +1,58 @@
-from fastapi import APIRouter, UploadFile, File
-from models.chat_history import ChatRequest
-from services.chat_service import process_chat, reset_history
-from services.tts_service import text_to_speech
-from services.stt_service import speech_to_text
-import uuid
 import os
+import uuid
+from fastapi import APIRouter, UploadFile, File, Form
+# from pydub import AudioSegment
+from services.stt_service import transcribe_audio
+from services.chat_service import process_chat
+from services.tts_service import text_to_speech
 
-router = APIRouter(prefix="/stt", tags=["STT"])
+router = APIRouter()
 
-# ---------------------------------------
-# 1️⃣ TEXT CHAT (Ask Didi Text Message)
-# ---------------------------------------
-@router.post("/ask")
-def ask(req: ChatRequest):
-    answer = process_chat(req.user_id, req.message)
+@router.post("/speech_ask")
+async def speech_ask(user_id: str = Form(...), audio: UploadFile = File(...)):
 
-    # Convert text → speech
-    audio_file = text_to_speech(answer)
+    # Save user audio temporarily
+    ext = audio.filename.split(".")[-1] 
+    filename = f"temp_{uuid.uuid4().hex}.{ext}"
+    filepath = os.path.join("temp_audio", filename)  # temp_audio/temp_96679c46b119445cac88f0787e726be0.mp3
+    os.makedirs("temp_audio", exist_ok=True)
 
-    # extract filename only
-    filename = audio_file.split("\\")[-1].split("/")[-1]
-    file_url = f"http://127.0.0.1:8000/tts/{filename}"
+    with open(filepath, "wb") as f:
+        f.write(await audio.read()) # writes data in form of bits at filepath
+    print("filesize:", os.path.getsize(filepath))
+
+    #converts webm to .wav
+    # sound = AudioSegment.from_file(filepath)
+    # wav_path = filepath.rsplit(".", 1)[0] + ".wav"
+    # sound.export(wav_path, format="wav")
+
+    # # 🔍 Debug audio properties
+    # wav = AudioSegment.from_file(wav_path)
+    # print("WAV duration (ms):", len(wav))
+    # print("WAV dBFS:", wav.dBFS)
+    # print("WAV RMS:", wav.rms)
+
+    # 1) Transcribe with .wav and gets the text
+    transcript = transcribe_audio(filepath)
+
+    # write transcript
+    # transcriptname = f"transcript_{uuid.uuid4().hex}.txt"
+    # transcriptpath = os.path.join("transcript", transcriptname)  #temp_audio/temp_96679c46b119445cac88f0787e726be0.mp3
+    # os.makedirs("transcript", exist_ok=True)
+
+    # with open(transcriptpath, "wb") as f:
+    #     f.write(transcript.encode("utf-8")) #writes data in form of bits at filepath
+
+    # 2) Process chat (Gemini answer)
+    answer = process_chat(user_id, transcript) # chat_service, response.text ⛳ - check if resp is both englisha nd hindi
+
+    # 3) Convert AI answer to speech
+    audio_path = text_to_speech(answer)
+    file_name = audio_path.replace("\\", "/").split("/")[-1]
+    audio_url = f"http://127.0.0.1:8000/tts/{file_name}"
 
     return {
+        "transcript": transcript,
         "answer": answer,
-        "audio_url": file_url
+        "audio_url": audio_url
     }
-
-
-# ---------------------------------------
-# 2️⃣ RESET CHAT MEMORY
-# ---------------------------------------
-@router.post("/reset_chat")
-def reset(req: ChatRequest):
-    reset_history(req.user_id)
-    return {"status": "chat reset"}
-
-
-# ---------------------------------------
-# 3️⃣ VOICE → TEXT (REQUIRED for AskDidi.jsx)
-# ---------------------------------------
-@router.post("/voice")
-async def voice_to_text(file: UploadFile = File(...)):
-    try:
-        # Save uploaded audio locally
-        filename = f"rec_{uuid.uuid4().hex}.wav"
-        filepath = os.path.join("uploads", filename)
-        os.makedirs("uploads", exist_ok=True)
-
-        with open(filepath, "wb") as f:
-            f.write(await file.read())
-
-        # Convert Speech → Text
-        text = speech_to_text(filepath)
-
-        return {"text": text}
-
-    except Exception as e:
-        return {"error": str(e)}
-    
-
-# from fastapi import APIRouter
-# from models.chat_history import ChatRequest
-# from services.chat_service import process_chat, reset_history
-# from services.tts_service import text_to_speech 
-
-# router = APIRouter(prefix="/stt", tags=["STT"])
-
-# @router.post("/ask")
-# def ask(req: ChatRequest):
-#     answer = process_chat(req.user_id, req.message)
-
-#     # Convert text → speech
-#     audio_file = text_to_speech(answer)
-
-#     filename = audio_file.split("\\")[-1].split("/")[-1]
-#     file_url = f"http://127.0.0.1:8000/tts/{filename}"
-
-#     return {
-#         "answer": answer,
-#         "audio_url": file_url
-#     }
-
-# @router.post("/reset_chat")
-# def reset(req: ChatRequest):
-#     reset_history(req.user_id)
-#     return {"status": "chat reset"}
-
-
-# from gtts import gTTS
-# import uuid
-# import os
-# import re
-
-# def clean_text(text):
-#     # Remove markdown bullets, stars, extra formatting
-#     text = re.sub(r"[*_#>-]", " ", text)   # remove markdown symbols
-#     text = re.sub(r"\s+", " ", text)       # fix double spaces
-#     return text.strip()
-
-# def text_to_speech(text, lang="hi"):
-#     text = clean_text(text)   # ← CLEAN TEXT FIRST
-
-#     # Detect English automatically
-#     if any(c.isalpha() for c in text) and not any("\u0900" <= c <= "\u097F" for c in text):
-#         lang = "en"
-
-#     filename = f"tts_{uuid.uuid4().hex}.mp3"
-#     filepath = os.path.join("tts_output", filename)
-#     print(filepath)
-#     os.makedirs("tts_output", exist_ok=True)
-
-#     tts = gTTS(text=text, lang=lang)
-#     tts.save(filepath)
-
-#     return filepath
